@@ -1,4 +1,4 @@
-# Object Tracking using YOLO RoIs and Feature Matching
+# Object Tracking using RoIs Feature Matching
 
 ### 🔍 Introduction
 
@@ -12,9 +12,15 @@ This project is a **custom object tracking system** that uses YOLO for detection
 
 > 🛠️ This is a **custom tracker**, inspired by Deep SORT, but built from scratch—no external ReID models or Deep SORT components.
 
+This approach recycles feature embeddings from YOLO's backbone, eliminating the need for a dedicated network to extract appearance features (like in DeepSort Tracking), and therefore reducing overhead!
+
+Here is a side-by-side comparison of approach (left) with YOLO's default tracker (right). Overall, the tracking enhances re-idtentification of objects compared to baseline.
+
 ![results](/materials/screenshot.png)
 
+
 ![Object Tracking](/materials/tracking_flowchart.png)
+
 
 
 
@@ -56,7 +62,7 @@ The object tracking system consists of three main components: **object detection
 
 ## Requirements
 
-### 1. Create and Activate Conda Environment
+### 1. Create and Activate Conda Environment (optional)
 ```sh
 conda create -n object_tracking python=3.9 -y
 conda activate object_tracking
