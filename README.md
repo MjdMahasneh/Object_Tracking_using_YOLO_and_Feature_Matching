@@ -12,9 +12,9 @@ This project is a **custom object tracking system** that uses YOLO for detection
 
 > 🛠️ This is a **custom tracker**, inspired by Deep SORT, but built from scratch—no external ReID models or Deep SORT components.
 
-![results](./materials/screenshot.png)
+![results](/materials/screenshot.png)
 
-![Object Tracking](./materials/tracking_flowchart.png)
+![Object Tracking](/materials/tracking_flowchart.png)
 
 
 
