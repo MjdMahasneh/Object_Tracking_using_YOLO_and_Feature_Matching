@@ -12,7 +12,12 @@ This project is a **custom object tracking system** that uses YOLO for detection
 
 > 🛠️ This is a **custom tracker**, inspired by Deep SORT, but built from scratch—no external ReID models or Deep SORT components.
 
+
+Here is a side-by-side comparison of approach (left) with YOLO's default tracker (right). The tracking struggles with heavily occluded cases indeed but overall enhances  re-idtentification of objects compared to baseline.
+
 ![results](/materials/screenshot.png)
+
+This approach recycles feature embeddings from YOLO's backbone, eliminating the need for a dedicated network to extract appearance features (like in DeepSort Tracking), and therefore reducing overhead!
 
 ![Object Tracking](/materials/tracking_flowchart.png)
 
