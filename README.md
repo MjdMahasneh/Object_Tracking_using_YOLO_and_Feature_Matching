@@ -1,4 +1,4 @@
-# Object Tracking using YOLO RoIs and Feature Matching
+# Object Tracking using RoIs Feature Matching
 
 ### 🔍 Introduction
 
