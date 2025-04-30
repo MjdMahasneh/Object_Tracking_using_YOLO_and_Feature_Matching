@@ -1,11 +1,20 @@
-# Object Tracking using YOLO and Feature Matching
+# Object Tracking using YOLO RoIs and Feature Matching
 
-I was having fun with **YOLO** and had an idea of using
-the YOLO feature maps to do some **similarity analysis** and feature matching between objects in different frames. This is a simple object tracking system that uses YOLO for object detection and **feature matching** for **object tracking** across frames. The system extracts feature embeddings from detected objects and assigns unique IDs to track them.
+### 🔍 Introduction
 
+While experimenting with **YOLO**, I had the idea to use its **intermediate feature maps** for **similarity analysis** and tracking objects across frames.
 
+This project is a **custom object tracking system** that uses YOLO for detection and combines **feature embedding similarity** with **Kalman filter-based motion prediction** to track objects over time.
 
-![Object Tracking](./materials/yolo_tracking_diagram.drawio.png)
+- Feature embeddings are extracted from YOLO's internal layers using **ROI Align**.
+- Objects are matched across frames using **cosine similarity** and **IoU**, combined in a cost matrix.
+- Matching is solved using the **Hungarian algorithm**, and tracks are maintained or terminated based on detection consistency.
+
+> 🛠️ This is a **custom tracker**, inspired by Deep SORT, but built from scratch—no external ReID models or Deep SORT components.
+
+![results](./materials/screenshot.png)
+
+![Object Tracking](./materials/tracking_flowchart.png)
 
 
 
@@ -18,30 +27,31 @@ The object tracking system consists of three main components: **object detection
 - The model predicts bounding boxes and class scores, identifying objects present in the frame.  
 - Large bounding boxes that take up most of the frame are ignored to reduce false detections.
 
-#### 2. Feature Extraction  
-- After detecting objects, we extract intermediate **feature maps** from a specific layer of the YOLO model.  
-- We register a **forward hook** on a deep convolutional layer (e.g., the second-to-last layer) to capture meaningful feature representations.  
-- **ROI (Region of Interest) Pooling** is applied to extract features specifically from the detected bounding boxes:  
-  - Each detected object’s bounding box is **mapped to the feature map space**.  
-  - The **ROI pooling operation** extracts a **fixed-size feature vector** (e.g., 2×2 grid) from the feature map corresponding to the detected region.  
-  - This ensures that different-sized objects have **consistent feature representations**, making tracking more reliable.  
-- The extracted feature vectors are then **flattened** into a 1D vector for similarity computation.  
-- Feature vectors are **normalized** to unit length to improve stability and make similarity comparisons more meaningful.
+#### 2. Appearance Feature Extraction
+- For each detected object, we extract **appearance features** using **ROI Align** from an intermediate YOLO feature map.  
+- Global average pooling and L2 normalization convert each feature map into a compact descriptor.
+
 
 #### 3. Object Tracking  
-- For tracking objects across frames, we use **feature similarity** instead of relying solely on object positions.  
-- Steps involved:  
+- We use a combination of **appearance features** and **motion prediction** to track objects across video frames.  
+
+- **Steps involved:**
+
   1. **Cosine Similarity Calculation**:  
-     - We compute the **cosine similarity** between the feature vectors of detected objects in the current frame and those from the previous frame.  
-     - Higher similarity means a higher likelihood that the object is the same across frames.  
-  2. **Assignment with the Hungarian Algorithm**:  
-     - Since multiple objects can be detected and need to be assigned correctly across frames, we use the **Hungarian algorithm** to find the optimal object matching.  
-     - This ensures minimal overall distance in similarity scores between tracked objects and newly detected objects.  
-  3. **Handling Object Loss**:  
-     - Objects that disappear from the frame are **tracked for a limited number of frames** (e.g., 100 frames).  
-     - If an object is not detected for too long, it is **removed from the tracking list** to prevent ghost tracking.  
-  4. **New Object Assignment**:  
-     - If a detected object does not match any tracked object, a **new unique ID** is assigned.
+     - We compare the appearance descriptors of current detections and previous tracks using **cosine similarity**.  
+     - This helps identify whether two objects look the same across frames.  
+  2. **Motion Prediction via Kalman Filter**:  
+     - Each track maintains a **Kalman filter** to predict its next position.  
+     - This provides robustness to missed detections or brief occlusions.  
+  3. **Spatial Similarity (IoU)**:  
+     - We compute **IoU** between predicted track positions and current detections to measure spatial consistency.  
+  4. **Cost Matrix + Hungarian Assignment**:  
+     - A weighted combination of appearance and spatial similarity forms a **cost matrix**.  
+     - The **Hungarian algorithm** assigns detections to tracks by minimizing cost.  
+  5. **Track Update and Management**:  
+     - Assigned tracks are updated with new detections and refined Kalman estimates.  
+     - Lost tracks are kept alive for a limited number of frames (e.g. 30), then removed.  
+     - New unmatched detections are given new IDs and initialized as new tracks.
 
 
 ## Requirements
@@ -66,10 +76,8 @@ python main.py
 
 
 
+That's it! You can now run the object tracking system on your own videos. The script will process the video, detect objects, extract features, and track them across frames. The output will be saved as a new video file with bounding boxes and IDs drawn around the tracked objects.
 
-## Example Output
-After running the script, the system will display a real-time tracking video and save the processed output as a new video file.
+Contributions and improvements are welcome! Feel free to modify the code, add new features, or enhance the tracking algorithm. If you have any questions or suggestions, please open an issue or submit a pull request.
 
-![Object Tracking](./results/results.png)
-
-
+Happy tracking! 

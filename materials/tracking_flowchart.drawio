@@ -1,0 +1,64 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.15 Chrome/134.0.6998.205 Electron/35.2.1 Safari/537.36" version="26.2.15">
+  <diagram name="Page-1" id="Q_9b8uMCjyPD9YnXvoxk">
+    <mxGraphModel dx="1933" dy="979" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="zDeiNx_rj06kzkurhNg7-29" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;dashPattern=8 8;" vertex="1" parent="1">
+          <mxGeometry x="-500" y="300" width="470" height="380" as="geometry" />
+        </mxCell>
+        <mxCell id="zDeiNx_rj06kzkurhNg7-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="zDeiNx_rj06kzkurhNg7-1" target="zDeiNx_rj06kzkurhNg7-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zDeiNx_rj06kzkurhNg7-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="zDeiNx_rj06kzkurhNg7-1" target="zDeiNx_rj06kzkurhNg7-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zDeiNx_rj06kzkurhNg7-1" value="YOLO&lt;br&gt;(Detect)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="-340" y="340" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="zDeiNx_rj06kzkurhNg7-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="zDeiNx_rj06kzkurhNg7-2" target="zDeiNx_rj06kzkurhNg7-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zDeiNx_rj06kzkurhNg7-2" value="RoI Pooling" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-180" y="340" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="zDeiNx_rj06kzkurhNg7-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="zDeiNx_rj06kzkurhNg7-3" target="zDeiNx_rj06kzkurhNg7-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zDeiNx_rj06kzkurhNg7-3" value="Kalman Filter (Motion Prediction)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-460" y="420" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="zDeiNx_rj06kzkurhNg7-10" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="zDeiNx_rj06kzkurhNg7-7" target="zDeiNx_rj06kzkurhNg7-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zDeiNx_rj06kzkurhNg7-7" value="IoU&lt;div&gt;(Spatial similarity)&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="-460" y="504.5" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="zDeiNx_rj06kzkurhNg7-28" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="zDeiNx_rj06kzkurhNg7-9" target="zDeiNx_rj06kzkurhNg7-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zDeiNx_rj06kzkurhNg7-9" value="Cost Matrix" style="whiteSpace=wrap;html=1;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="-300" y="505" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="zDeiNx_rj06kzkurhNg7-18" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="zDeiNx_rj06kzkurhNg7-15" target="zDeiNx_rj06kzkurhNg7-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zDeiNx_rj06kzkurhNg7-15" value="Hungarian Assignment" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-300" y="590" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="zDeiNx_rj06kzkurhNg7-17" value="Update&lt;div&gt;Tracks&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="-460" y="590" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="zDeiNx_rj06kzkurhNg7-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="zDeiNx_rj06kzkurhNg7-5" target="zDeiNx_rj06kzkurhNg7-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="zDeiNx_rj06kzkurhNg7-5" value="Cosine Similarity&lt;div&gt;(Appearance)&lt;/div&gt;" style="whiteSpace=wrap;html=1;rounded=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="-180" y="420" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="zDeiNx_rj06kzkurhNg7-30" value="&lt;font&gt;Tracking Pipeline&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-470" y="320" width="120" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
