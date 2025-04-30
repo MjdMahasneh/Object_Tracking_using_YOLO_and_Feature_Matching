@@ -56,7 +56,7 @@ The object tracking system consists of three main components: **object detection
 
 ## Requirements
 
-### 1. Create and Activate Conda Environment
+### 1. Create and Activate Conda Environment (optional)
 ```sh
 conda create -n object_tracking python=3.9 -y
 conda activate object_tracking
