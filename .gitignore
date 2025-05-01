@@ -1,6 +1,10 @@
 runs/
+legacy/
+.idea/
 
 *.mp4
 *.avi
 
 sample/
+
+datasets - convenient datasets from ultralytics/

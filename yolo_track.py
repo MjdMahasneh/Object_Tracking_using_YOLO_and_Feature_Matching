@@ -1,7 +1,7 @@
 from ultralytics import YOLO
 
 # sample video
-VIDEO_PATH = "./sample/video3.mp4"
+VIDEO_PATH = "./sample/video4.mp4"
 
 # Load an official or custom model
 model = YOLO("yolo11n.pt")  # Load an official Detect model

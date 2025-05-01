@@ -9,7 +9,10 @@ import torchvision.ops as ops
 from filterpy.kalman import KalmanFilter
 import time
 
-# ✅ Configurable parameters
+
+############################################
+## Configurable parameters
+############################################
 VIDEO_PATH = "./sample/video4.mp4"
 OUTPUT_VIDEO_PATH = "output.mp4"
 IMG_SIZE = 640
@@ -26,14 +29,18 @@ VIS_ACTIVE_TRACKS = True  # To visualize active tracks ONLY
 # Initialize colors dictionary at the start
 color_map = {}
 
-# ✅ Load YOLO model
+
+############################################
+## Load YOLO model
+############################################
 yolo_model = YOLO("yolo11n.pt")
 
 # results = yolo_model.track(VIDEO_PATH, save=True, conf=DETECTION_CONFIDENCE)
 
-# ✅ Hook to capture intermediate feature maps
+############################################
+## Hook to capture intermediate feature maps
+############################################
 FEATURE_MAPS = None
-
 
 def hook_fn(module, input, output):
     global FEATURE_MAPS
@@ -44,7 +51,10 @@ def hook_fn(module, input, output):
 target_layer = yolo_model.model.model[TARGET_LAYER_INDEX]
 target_layer.register_forward_hook(hook_fn)
 
-# ✅ Object tracking storage
+
+############################################
+## Object tracking storage
+############################################
 object_tracks = {}
 next_object_id = 1
 tracking_started = False
@@ -54,7 +64,9 @@ def random_color():
     return tuple(np.random.randint(0, 255, 3).tolist())
 
 
-# ✅ Kalman Filter initialization
+############################################
+## Kalman Filter initialization
+############################################
 def create_kalman_filter():
     """Initialize a Kalman filter for tracking in 4D state space: [x, y, w, h, vx, vy, vw, vh]"""
     kf = KalmanFilter(dim_x=8, dim_z=4)
@@ -138,8 +150,9 @@ def calculate_iou(box1, box2):
     iou = intersection_area / union_area if union_area > 0 else 0
     return iou
 
-
-# ✅ Process frame and extract features
+############################################
+## Process frame and extract features
+############################################
 def process_frame(frame):
     global FEATURE_MAPS
     orig_h, orig_w = frame.shape[:2]
@@ -222,10 +235,12 @@ def process_frame(frame):
         return bbox_list, np.zeros((len(bbox_list), C)), frame
 
 
-# ✅ Open video file
+############################################
+## Open video file
+############################################
 cap = cv2.VideoCapture(VIDEO_PATH)
 if not cap.isOpened():
-    print("❌ Error: Could not open video.")
+    print("Error: Could not open video.")
     exit()
 
 frame_width = int(cap.get(3))
@@ -487,5 +502,5 @@ finally:
     cap.release()
     out.release()
     cv2.destroyAllWindows()
-    print(f"✅ Tracking complete. Output saved to {OUTPUT_VIDEO_PATH}")
+    print(f"Tracking complete. Output saved to {OUTPUT_VIDEO_PATH}")
     print(f"Processed {frame_count} frames in {time.time() - start_time:.2f} seconds")
